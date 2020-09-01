@@ -1,14 +1,15 @@
-import React from 'react';
-import Context from '../Context/Context';
+import React from "react";
+import Context from "../Context/Context";
+import MyGraph from "../MyGraph/MyGraph";
 
 function Canvas() {
-    const {sessionId} = React.useContext(Context);
-    return (
-        <div>
-            <p>Canvas</p> <br></br>
-            <p>unique id = {sessionId}</p>
-        </div>  
-    );
+  const { sessionId } = React.useContext(Context);
+  return (
+    <div>
+      <p>unique id = {sessionId}</p>
+      <MyGraph />
+    </div>
+  );
 }
 
 export default Canvas;
