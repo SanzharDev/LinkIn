@@ -5,21 +5,34 @@ import {
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
+import { useFirebase } from "../../Firebase/useFirebase";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-function Siders() {
+function Siders({ createNode }) {
+  // const { database } = useFirebase();
+
+  function handleMenuItemClick({ item, key, keyPath, domEvent }) {
+    console.log(key);
+    createNode();
+  }
+
+  function fire() {
+
+  }
+
   return (
     <Sider width={200} className="site-layout-background">
       <Menu
         mode="inline"
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
+        onClick={handleMenuItemClick}
         style={{ height: "100%", borderRight: 0 }}
       >
         <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-          <Menu.Item key="1">option1</Menu.Item>
+          <Menu.Item key="createNode">Create Node</Menu.Item>
           <Menu.Item key="2">option2</Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">

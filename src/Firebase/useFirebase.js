@@ -9,11 +9,13 @@ const firebaseContext = React.createContext();
 // Provider hook that initializes firebase, creates firebase object and handles state
 function useProvideFirebase() {
   const [user, setUser] = React.useState(null);
-
+  const [database, setDatabase] = React.useState(null);
+  
   React.useEffect(() => {
     if (!firebase.apps.length) {
       console.log("I am initializing new firebase app");
       firebase.initializeApp(config);
+      setDatabase(firebase.database());
     }
 
     const unsubscribeFunction = firebase.auth().onAuthStateChanged((user) => {
@@ -41,6 +43,7 @@ function useProvideFirebase() {
 
   return {
     user,
+    database,
     register,
     login,
     signout,
@@ -51,6 +54,7 @@ function useProvideFirebase() {
 // ... available to any child component that calls useFirebase().
 export function ProvideFirebase({ children }) {
   const firebaseHook = useProvideFirebase();
+  console.log(firebaseHook);
   return (
     <firebaseContext.Provider value={firebaseHook}>
       {children}

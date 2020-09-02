@@ -2,7 +2,7 @@ import React from "react";
 import Context from "../Context/Context";
 import MyGraph from "../MyGraph/MyGraph";
 
-function Canvas() {
+function Canvas({ createNode }) {
   const { sessionId } = React.useContext(Context);
   return (
     <div>

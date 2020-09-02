@@ -4,9 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Router } from "@reach/router";
 import Context from "../Context/Context";
 import { ProvideFirebase } from "../Firebase/useFirebase";
-import Navigation from "../Navigation/Navigation";
 import Headers from "../Headers/Headers";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import Siders from "../Siders/Siders";
 import Home from "../Home/Home";
 import Canvas from "../Canvas/Canvas";
@@ -17,13 +16,17 @@ function App() {
   const sessionId = uuidv4();
   const contextValues = { sessionId };
 
+  function createNode() {
+    console.log('hello');
+  }
+
   return (
     <Context.Provider value={contextValues}>
       <ProvideFirebase>
         <Layout>
           <Headers />
           <Layout>
-            <Siders />
+            <Siders createNode={createNode} />
             <Layout>
               <Content
                 className="site-layout-background"
@@ -35,7 +38,7 @@ function App() {
               >
                 <Router>
                   <Home path="/" />
-                  <Canvas path="/canvas" />
+                  <Canvas path="/canvas" createNode={createNode} />
                 </Router>
               </Content>
             </Layout>
